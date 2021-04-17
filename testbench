@@ -1,0 +1,54 @@
+module tb_Logic_gates_gate_level;
+
+	// Inputs
+	reg a;
+	reg b;
+
+	// Outputs
+	wire and_out;
+	wire or_out;
+	wire not_out;
+	wire nand_out;
+	wire nor_out;
+	wire xor_out;
+	wire xnor_out;
+
+	// Instantiate the Unit Under Test (UUT)
+	Logic_gates uut (
+		.a(a), 
+		.b(b), 
+		.and_out(and_out), 
+		.or_out(or_out), 
+		.not_out(not_out), 
+		.nand_out(nand_out), 
+		.nor_out(nor_out), 
+		.xor_out(xor_out), 
+		.xnor_out(xnor_out)
+	);
+
+	initial begin
+		// Initialize Inputs
+		a = 0;
+		b = 0;
+
+		// Wait 100 ns for global reset to finish
+		#40;
+		
+		$stop;
+        
+		// Add stimulus here
+
+	end
+	
+	always #20 a = ~a;
+	always #10 b = ~b;
+	
+	initial begin
+	
+	$display("a \t b \t and \t or \t not \t nand \t nor \t xor \t xnor");
+	
+	$monitor("%b \t %b \t %b \t %b \t %b \t %b \t %b \t %b \t %b \t",a,b,and_out,or_out,not_out,nand_out,nor_out,xor_out,xnor_out);
+	
+	end
+      
+endmodule
